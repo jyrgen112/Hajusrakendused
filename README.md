@@ -1,63 +1,154 @@
-**Kirjeldus**  
-Kõik järgnevad ülesanded võib lahendada eraldi iseseisvate projektidena või ühendada need üheks terviklikuks rakenduseks, kus erinevad funktsionaalsused on omavahel integreeritud. Valmis lahendused tuleb laadida veebi (nt Zone) ning kood peab olema hallatud ja avaldatud kasutades versioonihaldust (GitHub, GitLab vms). Vajalik on lisada projekti dokumentatsioon, kus on kirjas rakenduse ülesehitus, kasutatud tehnoloogiad ja juhised koodi käivitamiseks.
+# Hajusrakendused
 
----
-### **Hajusrakenduse ülesanded**  
-#### **1. Ilmateenuse API liidestus**
-- Valida vabalt sobiv ilma API (nt https://openweathermap.org/api või muu sarnane teenus).
-- API-ga ühendumine ja ilmaandmete hankimine (eelistatud formaadis JSON või XML).
-- Andmete lokaalne vahemälu (cache), et vähendada API päringute arvu ja optimeerida kiirust.
-- Ilmaandmete kuvamine veebilehel, eelistatult koos visuaalsete elementidega (nt ikoonid või pildid vastavalt ilmastikuoludele).
-- Lisafunktsionaalsus: võimalus otsida ilmaandmeid eri linnade või riikide kohta.
+Laravel 11 veebirakendus, mis on valminud kooliprojektina ja sisaldab 5 integreeritud funktsionaalsuse moodulit.
 
-#### **2. Kaardirakendus API liidestus**
-- Valida sobiv kaardi API (nt Google Maps, OpenStreetMap, Radar Maps vms).
-- Luua andmebaasitabel `markers`, millel on järgmised väljad: `id`, `name`, `latitude`, `longitude`, `description`, `added`, `edited`.
-- Rakendada markerite haldusfunktsioonid (lisamine, vaatamine, muutmine, kustutamine).
-- Luua kaardivaade, mis kuvab kõik lisatud markerid.
-- Võimalus klõpsata kaardil, et salvestada uus marker koos kirjelduse ja koordinaatidega.
-- Kasulikud juhendid:
-  - [Google Maps API juhend](https://developers.google.com/maps/documentation/javascript/tutorial)
-  - [Radar Maps API dokumentatsioon](https://radar.com/documentation/maps/maps)
+## Live Demo
+> Lisa siia oma rakenduse URL pärast üleslaadimist
 
----
-### **Veebirakenduste arendamine**
-#### **3. Blogi ja Kommentaaride haldus**
-- Luua blogifunktsionaalsus.
-- Lisada autentimissüsteem (registreerimine ja sisselogimine).
-- Luua andmebaasitabel **blogi postitustele**, mille väljad on `id`, `title`, `description`, `created_at`, `updated_at`.
-- Teostada blogi sissekannete CRUD (postituste lisamine, muutmine, kustutamine ja vaatamine).
-- Lisada võimalus postitustele kommentaare lisada ning administraatori poolt kommentaare hallata (sh kustutada).
+## Moodulid
 
-#### **4. E-pood ja ostukorvi funktsionaalsus**
-- Luua **toote leht**, kus on vähemalt 9 erinevat toodet (pilt, nimi, hind, kirjeldus, koguse valik).
-- Rakendada **ostukorvi funktsionaalsus**, kus kasutaja saab:
-  - Lisada tooteid ostukorvi.
-  - Muuta ostukorvis olevate toodete kogust.
-  - Kustutada tooteid ostukorvist.
-- Luua **maksmise leht**, kus käsitletakse kasutaja andmeid (eesnimi, perenimi, email, telefon).
-- Integreerida makseteenuse pakkuja (nt Stripe, PayPal vms):
-  - Teostada turvaline ühendus makseteenuse API-ga.
-  - Luua lihtsasti kasutatav makseviisi valiku liides.
-  - Käsitleda maksete staatuste tagasisidet (õnnestumine, ebaõnnestumine, ootel).
-- Pärast maksmise toimingut:
-  - Kui makse on edukas, tühjendatakse ostukorv ja kuvatakse kinnitussõnum.
-  - Kui makse ebaõnnestub, jäävad tooted ostukorvi alles ja näidatakse veateadet.
-  - Salvestada tellimuse andmed andmebaasi.
+### 1. 🌤️ Ilmateenuse API
+- Pärib reaalajas ilmaandmeid OpenWeatherMap API kaudu
+- Linnade otsimise võimalus
+- 10-minutiline lokaalne vahemälu (cache) API päringute vähendamiseks
+- Kuvab temperatuuri, niiskuse, tuule kiiruse, õhurõhu ja ilmaikoonid
 
-#### **5. API loomine enda valitud teemal**
-- Valida endale isiklikult huvipakkuv teema (nt raamatud, filmid, toiduretseptid, matkamine vms) ning luua sellele põhinev API.
-- Luua andmebaasitabel `my_favorite_subject`, mille väljad on `id`, `title`, `image`, `description`, ja vähemalt kaks teemale omast lisaandmevälja (nt raamatute puhul `author` ja `publication_year`).
-- Luua kasutajasõbralik **andmete sisestamise vorm**, mis võimaldab kõigi vajalike väljade täitmist (title, description, image, +2 teemaspetsiifilist välja).
-- Luua dokumenteeritud JSON API, mis:
-  - Väljastab sisestatud andmeid koos filtreerimis- ja sorteerimisfunktsioonidega
-  - Võimaldab piirata tagastatavate kirjete arvu (parameetriga `limit`)
-  - Pakub otsingufunktsionaalsust vähemalt ühe välja põhjal
-- Teha **veebileht**, kus on näha nii enda kui ka teiste lisatud sisu ning võimalus neid sirvida ja filtreerida.
-- Lisada **andmete vahemäluga salvestamine (cache)**, et optimeerida API päringuid ja parandada rakenduse jõudlust.
+### 2. 🗺️ Kaardirakendus
+- Interaktiivne kaart Leaflet.js + OpenStreetMap abil (tasuta, API võtit pole vaja)
+- Täielik markerite haldus (lisamine, vaatamine, muutmine, kustutamine)
+- Klõpsa kaardil, et lisada uus marker
+- Kõik markerid salvestatakse andmebaasi ja kuvatakse lehe laadimisel
 
----
-**Hindamiskriteeriumid**  
-- **Hinne 3:** Kõik ülesandes toodud kriteeriumid peavad olema täidetud.  
-- **Hinne 4:** Lisaks eelnevale peab rakenduse kasutajaliides olema visuaalselt korrektne, kasutama kaasaegseid UI-tehnikaid ning ei tohi esineda nähtavaid vigu.  
-- **Hinne 5:** Kõik eelnevad tingimused peavad olema täidetud ning kood peab olema hästi struktureeritud ja optimeeritud. Kui koodi kvaliteet on alla standardi, võib see kaasa tuua madalama hinde.
+### 3. 📝 Blogi ja kommentaarid
+- Täielik autentimissüsteem (registreerimine, sisselogimine, väljalogimine)
+- Blogipostituste haldus (lisamine, muutmine, kustutamine, vaatamine)
+- Kommentaaride süsteem igale postitusele
+- Ainult postituse autor saab oma postitusi muuta/kustutada
+- Administraator saab kustutada kõiki kommentaare
+
+### 4. 🛍️ E-pood
+- 9 toodet koos piltide, nimede, hindade ja kirjeldustega
+- Ostukorv (lisamine, koguse muutmine, eemaldamine)
+- Kassavorm (eesnimi, perenimi, e-post, telefon)
+- Stripe makseintegratsioon (testkeskkonnas)
+- Tellimused salvestatakse andmebaasi pärast edukat makset
+- Õnnestunud ja ebaõnnestunud makse käsitlemine
+
+### 5. ⚔️ Warframe Alerts API
+- Pärib reaalajas mänguandmeid ametlikust Warframe API-st (api.warframestat.us)
+- Kuvab aktiivseid hoiatusi, sündmusi ja invasioone
+- Andmed salvestatakse lokaalses andmebaasis ja uuendatakse iga 10 minuti järel
+- Filtreerimine tüübi (hoiatus/sündmus/invasioon) ja fraktsiooni järgi
+- Otsingu- ja sorteerimisvõimalus
+- JSON API lõpp-punkt aadressil `/api/warframe` koos piirangu, filtri ja otsinguga
+
+## Kasutatud tehnoloogiad
+
+- **Backend:** Laravel 11 (PHP 8.3)
+- **Frontend:** Vue 3 + Inertia.js
+- **Stiil:** Tailwind CSS
+- **Ehitusvahend:** Vite
+- **Andmebaas:** SQLite
+- **Autentimine:** Laravel Breeze
+- **Kaardid:** Leaflet.js + OpenStreetMap
+- **Maksed:** Stripe
+- **API-d:** OpenWeatherMap, Warframe API (api.warframestat.us)
+- **Versioonihaldus:** Git + GitHub
+
+## Nõuded
+
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- NPM
+
+## Paigaldamine ja käivitamine
+
+### 1. Klooni repositoorium
+```bash
+git clone https://github.com/jyrgen112/Hajusrakendused.git
+cd Hajusrakendused
+```
+
+### 2. Paigalda sõltuvused
+```bash
+composer install
+npm install
+```
+
+### 3. Seadista keskkond
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Lisa API võtmed `.env` faili
+```
+OPENWEATHER_API_KEY=sinu_openweathermap_võti
+STRIPE_KEY=sinu_stripe_avalik_võti
+STRIPE_SECRET=sinu_stripe_salajane_võti
+```
+
+### 5. Seadista andmebaas
+```bash
+php artisan migrate
+php artisan db:seed --class=ProductSeeder
+```
+
+### 6. Käivita rakendus
+Ava kaks terminali akent:
+
+**Terminal 1 — Laravel server:**
+```bash
+php artisan serve
+```
+
+**Terminal 2 — Vite varad:**
+```bash
+npm run dev
+```
+
+Seejärel ava brauser aadressil **http://127.0.0.1:8000**
+
+## Stripe maksete testimine
+
+Kasuta kassalehel järgmisi testkaardiandmeid:
+- **Kaardi number:** 4242 4242 4242 4242
+- **Aegumiskuupäev:** mis tahes tuleviku kuupäev (nt 12/34)
+- **CVC:** mis tahes 3 numbrit (nt 123)
+
+## Projekti struktuur
+```
+app/
+├── Http/Controllers/
+│   ├── WeatherController.php
+│   ├── MarkerController.php
+│   ├── PostController.php
+│   ├── CommentController.php
+│   ├── ShopController.php
+│   ├── CartController.php
+│   ├── CheckoutController.php
+│   └── WarframeController.php
+├── Models/
+│   ├── Marker.php
+│   ├── Post.php
+│   ├── Comment.php
+│   ├── Product.php
+│   ├── Order.php
+│   ├── OrderItem.php
+│   └── WarframeAlert.php
+resources/js/Pages/
+├── Welcome.vue          # Avalehe hub
+├── Weather/Index.vue    # Moodul 1
+├── Map/Index.vue        # Moodul 2
+├── Blog/Index.vue       # Moodul 3
+├── Shop/                # Moodul 4
+│   ├── Index.vue
+│   ├── Cart.vue
+│   ├── Checkout.vue
+│   └── Success.vue
+└── Warframe/Index.vue   # Moodul 5
+```
+
+## Autor
+Jürgen — kooliprojekt Hajusrakendused kursuse raames
