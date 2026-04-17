@@ -3,7 +3,7 @@
 Laravel 11 veebirakendus, mis on valminud kooliprojektina ja sisaldab 5 integreeritud funktsionaalsuse moodulit.
 
 ## Live Demo
-> Lisa siia oma rakenduse URL pärast üleslaadimist
+https://tak23vander.itmajakas.ee
 
 ## Moodulid
 
