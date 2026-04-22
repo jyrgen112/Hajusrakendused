@@ -15,7 +15,7 @@ class GameController extends Controller
             return Game::orderBy('created_at', 'desc')->get();
         });
 
-        return Inertia::render('Games/Index', [
+        return Inertia::render('Game/Index', [
             'games' => $games,
         ]);
     }
