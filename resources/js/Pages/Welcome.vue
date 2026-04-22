@@ -9,11 +9,11 @@ defineProps({
 });
 
 const modules = [
-    { title: 'Weather', emoji: '🌤️', description: 'Live weather data for any city using OpenWeatherMap API with caching.', href: '/weather', color: 'from-blue-400 to-cyan-500' },
-    { title: 'Map & Markers', emoji: '🗺️', description: 'Interactive map to add, edit and delete location markers.', href: '/map', color: 'from-green-400 to-emerald-500' },
-    { title: 'Blog', emoji: '📝', description: 'Write blog posts, leave comments and manage content with authentication.', href: '/blog', color: 'from-purple-400 to-violet-500' },
-    { title: 'Shop', emoji: '🛍️', description: 'Browse products, manage your cart and checkout securely with Stripe.', href: '/shop', color: 'from-orange-400 to-pink-500' },
-    { title: 'Warframe Alerts', emoji: '⚔️', description: 'Live Warframe game alerts, events and invasions from the official API.', href: '/warframe', color: 'from-gray-600 to-blue-800' },
+    { title: 'Weather', emoji: '🌤️', image: null, description: 'Live weather data for any city using OpenWeatherMap API with caching.', href: '/weather', color: 'from-blue-400 to-cyan-500' },
+    { title: 'Map & Markers', emoji: '🗺️', image: null, description: 'Interactive map to add, edit and delete location markers.', href: '/map', color: 'from-green-400 to-emerald-500' },
+    { title: 'Blog', emoji: '📝', image: null, description: 'Write blog posts, leave comments and manage content with authentication.', href: '/blog', color: 'from-purple-400 to-violet-500' },
+    { title: 'Shop', emoji: '🛍️', image: null, description: 'Browse products, manage your cart and checkout securely with Stripe.', href: '/shop', color: 'from-orange-400 to-pink-500' },
+    { title: 'My Games', emoji: null, image: '/imgs/warframe.jpg', description: 'Browse, add and filter my favorite games with a JSON API.', href: '/games', color: 'from-indigo-600 to-purple-800' },
 ]
 </script>
 
@@ -39,7 +39,10 @@ const modules = [
                 <a v-for="module in modules" :key="module.title" :href="module.href" class="group relative rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-gray-600 transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
                     <div :class="`absolute inset-0 bg-gradient-to-br ${module.color} opacity-10 group-hover:opacity-20 transition`"></div>
                     <div class="relative p-6">
-                        <div class="text-4xl mb-4">{{ module.emoji }}</div>
+                        <div class="text-4xl mb-4">
+                            <img v-if="module.image" :src="module.image" class="w-16 h-16 object-contain" />
+                            <span v-else>{{ module.emoji }}</span>
+                        </div>
                         <h3 class="text-xl font-bold text-white mb-2">{{ module.title }}</h3>
                         <p class="text-gray-400 text-sm leading-relaxed">{{ module.description }}</p>
                         <div class="mt-4 flex items-center text-indigo-400 text-sm font-semibold group-hover:text-indigo-300">

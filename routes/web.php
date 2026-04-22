@@ -12,6 +12,8 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\WarframeController;
+use App\Http\Controllers\GameController;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -58,5 +60,11 @@ Route::get('/warframe', [WarframeController::class, 'index'])->name('warframe');
 Route::post('/warframe/refresh', [WarframeController::class, 'refresh'])->name('warframe.refresh');
 Route::get('/api/warframe', [WarframeController::class, 'api'])->name('warframe.api');
 });
+
+Route::get('/games', [GameController::class, 'index']);
+Route::post('/games', [GameController::class, 'store']);
+Route::put('/games/{game}', [GameController::class, 'update']);
+Route::delete('/games/{game}', [GameController::class, 'destroy']);
+Route::get('/api/games', [GameController::class, 'api']);
 
 require __DIR__.'/auth.php';

@@ -1,7 +1,16 @@
 <template>
   <div class="min-h-screen bg-gray-100">
     <div class="max-w-7xl mx-auto p-6">
-      <h1 class="text-3xl font-bold text-gray-800 mb-6">🗺️ Map & Markers</h1>
+      <div class="flex items-center gap-4 mb-6">
+        <!-- Back Button -->
+        <a href="/" class="inline-flex items-center gap-2 text-gray-500 hover:text-gray-800 text-sm transition">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          Back to Home
+        </a>
+        <h1 class="text-3xl font-bold text-gray-800">🗺️ Map & Markers</h1>
+      </div>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2">
           <div class="bg-white rounded-2xl shadow overflow-hidden">
@@ -66,7 +75,6 @@ onMounted(() => {
   link.rel = 'stylesheet'
   link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
   document.head.appendChild(link)
-
   const script = document.createElement('script')
   script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
   script.onload = () => setTimeout(() => initMap(), 100)

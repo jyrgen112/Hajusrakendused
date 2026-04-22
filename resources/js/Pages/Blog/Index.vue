@@ -1,6 +1,15 @@
 <template>
   <div class="min-h-screen bg-gray-50">
     <div class="max-w-4xl mx-auto p-6">
+
+      <!-- Back Button -->
+      <a href="/" class="inline-flex items-center gap-2 text-gray-500 hover:text-gray-800 text-sm transition mb-6">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Back to Home
+      </a>
+
       <h1 class="text-3xl font-bold text-gray-800 mb-8">📝 Blog</h1>
 
       <!-- New Post Form (auth only) -->
@@ -27,8 +36,6 @@
       <!-- Posts -->
       <div class="space-y-6">
         <div v-for="post in posts" :key="post.id" class="bg-white rounded-2xl shadow p-6">
-
-          <!-- Post Header -->
           <div class="flex justify-between items-start mb-3">
             <div>
               <h2 class="text-xl font-bold text-gray-800">{{ post.title }}</h2>
@@ -39,11 +46,7 @@
               <button @click="deletePost(post.id)" class="text-red-500 text-sm hover:underline">Delete</button>
             </div>
           </div>
-
-          <!-- Post Body -->
           <p class="text-gray-600 mb-6 whitespace-pre-line">{{ post.description }}</p>
-
-          <!-- Comments -->
           <div class="border-t pt-4">
             <h3 class="text-sm font-semibold text-gray-500 mb-3">Comments ({{ post.comments.length }})</h3>
             <div class="space-y-3 mb-4">
@@ -59,8 +62,6 @@
                 >Delete</button>
               </div>
             </div>
-
-            <!-- Add Comment -->
             <div v-if="$page.props.auth.user" class="flex gap-2">
               <input
                 v-model="commentForms[post.id]"
@@ -77,9 +78,7 @@
               <a href="/login" class="text-indigo-600 hover:underline">Log in</a> to comment.
             </p>
           </div>
-
         </div>
-
         <p v-if="posts.length === 0" class="text-center text-gray-400 py-12">No posts yet. Be the first to write one!</p>
       </div>
 

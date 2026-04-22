@@ -1,7 +1,15 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center p-6">
     <div class="bg-white/20 backdrop-blur-md rounded-3xl p-8 w-full max-w-md text-white shadow-2xl">
-      
+
+      <!-- Back Button -->
+      <a href="/" class="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm mb-6 transition">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Back to Home
+      </a>
+
       <!-- Search -->
       <form @submit.prevent="search" class="flex gap-2 mb-8">
         <input
@@ -30,7 +38,6 @@
         />
         <p class="text-6xl font-extrabold">{{ Math.round(weather.main.temp) }}°C</p>
         <p class="text-xl capitalize mt-1">{{ weather.weather[0].description }}</p>
-
         <div class="grid grid-cols-2 gap-4 mt-8 text-sm">
           <div class="bg-white/20 rounded-2xl p-4">
             <p class="opacity-70">Feels like</p>
@@ -50,7 +57,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -69,4 +75,4 @@ const cityInput = ref(props.city)
 function search() {
   router.get('/weather', { city: cityInput.value })
 }
-</script>   
+</script>
